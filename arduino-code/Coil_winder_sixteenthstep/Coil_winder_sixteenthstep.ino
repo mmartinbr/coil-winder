@@ -7,6 +7,7 @@ int step_y = 3;
 int dir_y = 6;
 int endstop_x = 9;
 int value = 0;
+int t = 0.05;
 
 //Definimos las características del la bobina que queremos devanar:
 float L = 40; //Longitud de la bobina a devanar, en mm
@@ -31,38 +32,25 @@ void loop() {
   for (int z = 0; z < a; z++) {
 
     //Slider de o en o
-    for (int k = 1; k < o; k++) {
+    for (int k = 1; k < 100; k++) {
 
       digitalWrite(dir_x, HIGH);
       delay(1); //Pequeña pausa
       digitalWrite(step_x, HIGH);
-      delay(5); //Pequeña pausa
+      delay(0.05); //Pequeña pausa
       digitalWrite(step_x, LOW);
-      delay(5); //Pequeña pausa
+      delay(0.05); //Pequeña pausa
       z = z + 1;
 
       //Winder de 3200 en 3200 (micro steps *16)
       for (int m = 1; m < 3200; m++) {
-        digitalWrite(dir_y, HIGH);
+        digitalWrite(dir_y, LOW);
         delay(1); //Pequeña pausa
         digitalWrite(step_y, HIGH);
-        delay(5); //Pequeña pausa
+        delay(t); //Pequeña pausa
         digitalWrite(step_y, LOW);
-        delay(5); //Pequeña pausa
+        delay(t); //Pequeña pausa
       }
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

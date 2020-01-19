@@ -24,6 +24,7 @@ void loop() {
             value = digitalRead(endstop_x);
             
                 if(value == LOW){
+                  
                       Serial.println("Apagado");
                       digitalWrite(dir_x, HIGH);
                       delay(1); //Pequeña pausa
@@ -33,12 +34,10 @@ void loop() {
                       delay(5); //Pequeña pausa
              }
                  else{
-                       digitalWrite(step_x, LOW);
+                       digitalWrite(dir_x, LOW);
                        Serial.println("Encendido");
 
      }  
                             delay(100);
      }  
 }   
-
-
