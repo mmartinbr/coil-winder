@@ -2,9 +2,9 @@
 
 int enable = 8;
 
-//Definimos las características del la bobina que queremos devanar:
-float L = 44; // Longitud de la bobina a devanar, en mm
-int N = 3; //Número de capas
+//Inicializamos las variables de las características del la bobina que queremos devanar:
+int L = 0; // Longitud de la bobina a devanar, en mm
+int N = 0; //Número de capas
 
 
 
@@ -14,9 +14,8 @@ int dir_x = 5;
 boolean sentidox = LOW;
 //int tx = 10;
 int tx = 1;
-int pasosx = (16 * L / 0.2) - 10; // - 10 es un ajuste
 //int pasosx = 1200; // Pasos a dar longitudinalmente para completar una capa: Este cálculo se hará en función de las variables introducidas por el usuario
-
+int pasosx = 0;
 /*** MOTOR Y (Winder) ***/
 int step_y = 3;
 int dir_y = 6;
@@ -39,6 +38,8 @@ void setup() {
   Wire.begin(8);                
   Wire.onReceive(receiveEvent);
   Serial.begin(9600);
+  
+  int pasosx = (16 * L / 0.2) - 10; // - 10 es un ajuste
   
   pinMode(enable, OUTPUT);
   pinMode(dir_x, OUTPUT);
@@ -117,7 +118,7 @@ void receiveEvent(int howMany) {
   while (1 < Wire.available()) { // loop through all but the last 
     int L = Wire.read(); // receive first byte as an integer (longitude)
     Serial.println(L); // print the integer  
-    int n = Wire.read(); // receive second byte as an integer (number of layers)
+    int N = Wire.read(); // receive second byte as an integer (number of layers)
     Serial.println(N); // print the integer
   }
 }
