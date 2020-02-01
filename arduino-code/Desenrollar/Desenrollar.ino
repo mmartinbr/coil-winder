@@ -26,23 +26,17 @@ void setup() {
 
 void loop() {
 
-                //Desenrollar hilo
+
+
+               //Desenrollar hilo
                 for (int m = 1; m < 10000000; m++){
-                    digitalWrite(dir_y, LOW);
+                    digitalWrite(dir_x, LOW);
                     delay(1); //Pequeña pausa
-                    digitalWrite(step_y, HIGH);
-                    delay(5); //Pequeña pausa
-                    digitalWrite(step_y, LOW);
-                    delay(5); //Pequeña pausa   
+                    digitalWrite(step_x, HIGH);
+                    delay(0.5); //Pequeña pausa
+                    digitalWrite(step_x, LOW);
+                    delay(0.5); //Pequeña pausa   
+                } 
+                
+                
                 }
-if (digitalRead(endstop_x))
-    StopPAP();
- else
-    RunPAP();
-    }
-
-
-      if (digitalRead(FinDeCarreraPin))
-    StopPAP();
- else
-    RunPAP();
