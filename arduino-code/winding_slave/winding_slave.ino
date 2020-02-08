@@ -24,7 +24,7 @@ boolean sentidoy = LOW;
 int ty = 2;
 int pasosy = 9600; // Regulación de frecuencia movimiento Winder/Slider: Avanza en el eje x cada 3 vueltas
 //int pasosy = 10;
-
+//int pasosx = (16 * L / 0.2) - 10;
 // Final de carrera (Motor x)
 int endstop_x = 9;
 int value = 0; //Inicializamos la variable que almacena el valor leído en el final de carrera
@@ -35,11 +35,11 @@ int i = 0; // Contador de capas
 
 
 void setup() {
-  Wire.begin(8);                
-  Wire.onReceive(receiveEvent);
+ Wire.begin(8);                
+ Wire.onReceive(receiveEvent);
   Serial.begin(9600);
   
-  int pasosx = (16 * L / 0.2) - 10; // - 10 es un ajuste
+  
   
   pinMode(enable, OUTPUT);
   pinMode(dir_x, OUTPUT);
@@ -49,26 +49,12 @@ void setup() {
   pinMode(endstop_x, INPUT);
   Serial.print(pasosx);
 
-  // Posicionamiento inicial
-  while (digitalRead(endstop_x) == LOW) {  // Avanzar hasta tocar el final de carrera
-    digitalWrite(dir_x, HIGH);      
-    digitalWrite(step_x, HIGH);
-    delay(2);                      
-    digitalWrite(step_x, LOW);
-    delay(2);   
-  }
-  for (int m = 1; m < 100; m++) { // Retroceso hasta la posición inicial de bobinado
-    digitalWrite(dir_x, LOW);     
-    digitalWrite(step_x, HIGH);
-    delay(2);                       
-    digitalWrite(step_x, LOW);
-    delay(2);   
-  }
 
 }
 
 void loop() {
- stepper (pasosx, pasosy);  //Función de movimiento de los motores
+ //stepper (pasosx, pasosy);  //Función de movimiento de los motores
+ Serial.println("Hola");
 }
 
 
@@ -76,6 +62,7 @@ void loop() {
 void stepper (int pasosx, int pasosy){
  digitalWrite (dir_x, sentidox);
  digitalWrite (dir_y, sentidoy);
+ Serial.println("Hola");
 while (i < N) {
      for (int m = 1; m < pasosx; m++) {
          digitalWrite (dir_x, sentidox);
@@ -121,4 +108,27 @@ void receiveEvent(int howMany) {
     int N = Wire.read(); // receive second byte as an integer (number of layers)
     Serial.println(N); // print the integer
   }
+    // Posicionamiento inicial
+    int pasosx = (16 * L / 0.2) - 10; // - 10 es un ajuste
+  while (digitalRead(endstop_x) == LOW) {  // Avanzar hasta tocar el final de carrera
+    digitalWrite(dir_x, HIGH);      
+    digitalWrite(step_x, HIGH);
+    delay(2);                      
+    digitalWrite(step_x, LOW);
+    delay(2);   
+  }
+  for (int m = 1; m < 100; m++) { // Retroceso hasta la posición inicial de bobinado
+    digitalWrite(dir_x, LOW);     
+    digitalWrite(step_x, HIGH);
+    delay(2);                       
+    digitalWrite(step_x, LOW);
+    delay(2);   
+  }
+
+
+  delay(5000);  
+stepper (pasosx, pasosy);  //Función de movimiento de los motores
+
+
+  
 }
