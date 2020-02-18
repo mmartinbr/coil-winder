@@ -30,11 +30,11 @@ void loop() {
 
                //Desenrollar hilo
                 for (int m = 1; m < 10000000; m++){
-                    digitalWrite(dir_x, LOW);
+                    digitalWrite(dir_y, HIGH);
                     delay(1); //Pequeña pausa
-                    digitalWrite(step_x, HIGH);
+                    digitalWrite(step_y, HIGH);
                     delay(0.5); //Pequeña pausa
-                    digitalWrite(step_x, LOW);
+                    digitalWrite(step_y, LOW);
                     delay(0.5); //Pequeña pausa   
                 } 
                 

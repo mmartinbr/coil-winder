@@ -105,12 +105,12 @@ void loop()
             Serial.println("Enviando parámetros a Arduino slave..."); // Se envían los parámetros de longitud y número de capas seleccionados por el usuario a la placa Arduino slave
             Wire.beginTransmission(8);
             Serial.println("Longitud:");
-            Serial.println(variable[1]);
+            Serial.println(variable[0]);
             Serial.println("Número de capas:");
-            Serial.println(variable[2]);
+            Serial.println(variable[1]);
             
-            Wire.write(variable[1]); // sends one byte // Longitud
-            Wire.write(variable[2]); // sends one byte // Numero de capas 
+            Wire.write(variable[0]); // sends one byte // Longitud
+            Wire.write(variable[1]); // sends one byte // Numero de capas 
             Wire.endTransmission(); // stop transmitting
             delay(500); 
 
@@ -135,7 +135,8 @@ void loop()
         lcd.print(tituloMenu[x]);
         lcd.setCursor(0,1); 
         lcd.print(String(tituloSubmenu[x]) + String(variable[x]));
-        Serial.println(x);
+       
+        //Serial.println(x);
 
       }
     
